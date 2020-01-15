@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
     // Posición original de la bola y rotación original del tablero (laberinto)
     private Vector3 originalBallPosition;
     private Quaternion originalMazeRotation;
+    private Vector3 originalKingBooPosition;
 
 
     void Start() 
@@ -39,13 +40,18 @@ public class PlayerController : MonoBehaviour {
         // Almacenamos la posición original de la pelota y la rotación original del tablero
         originalBallPosition = gameObject.transform.position;
         originalMazeRotation = GameObject.FindWithTag("laberinto").transform.rotation;
+        if (GameObject.FindWithTag("kingBoo") != null) {
+            originalKingBooPosition = GameObject.FindWithTag("kingBoo").transform.position;
+        }
 
         // Obtenemos el nombre de la escena activa
         sceneName = SceneManager.GetActiveScene().name;
 
         SetCountText();
         winText.text = "";
-	}
+        //Cambia el tiempo del juego
+        Time.timeScale = 1F;
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -60,12 +66,14 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-		if (other.gameObject.CompareTag ("boo")) {
-			other.gameObject.SetActive (false);
-			contador = contador + 1;
-			SetCountText ();
+        if (other.gameObject.CompareTag("boo"))
+        {
+            other.gameObject.SetActive(false);
+            contador = contador + 1;
+            SetCountText();
 
-		}else if (other.gameObject.CompareTag("fondo"))
+        }
+        else if (other.gameObject.CompareTag("fondo") || other.gameObject.CompareTag("kingBoo"))
         {
             contadorVidas = contadorVidas - 1;
 
@@ -73,16 +81,20 @@ public class PlayerController : MonoBehaviour {
 
             if (contadorVidas == 0)
             {
+                Time.timeScale = 0.3F;
                 winText.text = "Perdiste";
-                Invoke("QuitGame", 1.5f);
+                Invoke("QuitGame", 1f);
             }
             else
             {
                 // Si le quedan vidas, volvemos a colocar la pelota en su posición original y el tablero a su rotación original
                 gameObject.transform.position = originalBallPosition;
                 GameObject.FindWithTag("laberinto").transform.rotation = originalMazeRotation;
+                if (GameObject.FindWithTag("kingBoo") != null) {
+                    GameObject.FindWithTag("kingBoo").transform.position = originalKingBooPosition;
+                }
             }
-            
+
         }
 
     }
@@ -92,28 +104,41 @@ public class PlayerController : MonoBehaviour {
             countText.text = "Contador: " + contador.ToString();
             if (contador >= booTotal)
             {
+            Time.timeScale = 0.3F;
             switch (sceneName) {
                 // Cargamos el laberinto medio
                 case "laberintoFacil":
                     winText.text = "Preparate para el nivel medio";
-                    Invoke("LoadSceneFacil", 1.5f);
+                    Invoke("LoadSceneMedio", 1f);
+                    break;
+
+                // Cargamos el laberinto dificl
+                case "laberintoMedio":
+                    winText.text = "Preparate para el nivel dificil";
+                    Invoke("LoadSceneDificil", 1f);
                     break;
 
                 // Cargamos el laberinto dificil
-                case "laberintoMedio":
+                case "laberintoDificil":
                     winText.text = "Ganaste";
-                    Invoke("QuitGame", 1.5f);
+                    Invoke("QuitGame", 1f);
                     break;
+
             }				
             }
     }
 
-    void LoadSceneFacil()
+    void LoadSceneMedio()
     {
         SceneManager.LoadScene("laberintoMedio");
     }
 
-	void QuitGame()
+    void LoadSceneDificil()
+    {
+        SceneManager.LoadScene("laberintoDificil");
+    }
+
+    void QuitGame()
 	{
 		#if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false;

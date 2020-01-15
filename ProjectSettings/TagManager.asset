@@ -12,6 +12,7 @@ TagManager:
   - boo
   - suelo
   - laberinto
+  - kingBoo
   layers:
   - Default
   - TransparentFX
