@@ -320,6 +320,12 @@ PrefabInstance:
       propertyPath: vidasImages.Array.data[2]
       value: 
       objectReference: {fileID: 1477481668}
+    - target: {fileID: 6652423351961017869, guid: d006f6894e152994d95bea7b6680a94c,
+        type: 3}
+      propertyPath: explosionObject
+      value: 
+      objectReference: {fileID: 3423961329146552634, guid: 072c2c624a7e2d246a5414e61736005b,
+        type: 3}
     - target: {fileID: 6652423351961017871, guid: d006f6894e152994d95bea7b6680a94c,
         type: 3}
       propertyPath: m_Name
@@ -495,6 +501,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9bdcdf69a1daaf94bae67ffca26db6d3, type: 2}
+    - target: {fileID: -1504981713932161579, guid: 20764b1736df9204db8be1c08f4e9d89,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 20764b1736df9204db8be1c08f4e9d89,
         type: 3}
       propertyPath: m_Name
@@ -552,6 +563,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2069527581231208872, guid: 613c049de7528474f9f056183832fba2,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2069527581231208874, guid: 613c049de7528474f9f056183832fba2,
         type: 3}
       propertyPath: m_Name

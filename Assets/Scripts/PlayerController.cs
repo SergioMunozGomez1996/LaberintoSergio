@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
     // Imágenes de las vidas
     public GameObject[] vidasImages;
 
+    public GameObject explosionObject; //Para que se pueda indicar la explosion a ejecutar.
+
     private Rigidbody rb;
     // Contador del número de coleccionables que ha conseguido
     private int contador;
@@ -77,24 +79,10 @@ public class PlayerController : MonoBehaviour {
         {
             contadorVidas = contadorVidas - 1;
 
-            deleteVidas();
-
-            if (contadorVidas == 0)
-            {
-                Time.timeScale = 0.3F;
-                winText.text = "Perdiste";
-                Invoke("QuitGame", 1f);
-            }
-            else
-            {
-                // Si le quedan vidas, volvemos a colocar la pelota en su posición original y el tablero a su rotación original
-                gameObject.transform.position = originalBallPosition;
-                GameObject.FindWithTag("laberinto").transform.rotation = originalMazeRotation;
-                if (GameObject.FindWithTag("kingBoo") != null) {
-                    GameObject.FindWithTag("kingBoo").transform.position = originalKingBooPosition;
-                }
-            }
-
+            Instantiate(explosionObject, transform.position, Quaternion.identity); //Se ejecuta la explosion
+            gameObject.SetActive(false);
+            deleteVidasImage();
+            Invoke("deleteVidas", 1.5f);
         }
 
     }
@@ -150,10 +138,32 @@ public class PlayerController : MonoBehaviour {
 	}
 
     // Método que eliminará uno de los iconos de vidas de la esquina superior derecha.
-    void deleteVidas()
+    void deleteVidasImage()
     {
         vidasImages[vidasImages.Length - 1].SetActive(false);
         Array.Resize(ref vidasImages, vidasImages.Length - 1);
+    }
+
+    //Método que eliminará una vida del conteo y actuará en consecuencia
+    void deleteVidas()
+    {
+        if (contadorVidas == 0)
+        {
+            Time.timeScale = 0.3F;
+            winText.text = "Perdiste";
+            Invoke("QuitGame", 1f);
+        }
+        else
+        {
+            // Si le quedan vidas, volvemos a colocar la pelota en su posición original y el tablero a su rotación original
+            gameObject.SetActive(true);
+            gameObject.transform.position = originalBallPosition;
+            GameObject.FindWithTag("laberinto").transform.rotation = originalMazeRotation;
+            if (GameObject.FindWithTag("kingBoo") != null)
+            {
+                GameObject.FindWithTag("kingBoo").transform.position = originalKingBooPosition;
+            }
+        }
     }
 
 }

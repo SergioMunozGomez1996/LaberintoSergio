@@ -33,10 +33,10 @@ public class Perseguir : MonoBehaviour
         transform.LookAt(target);
 
         //Recupera la distancia que hay desde el objeto al target
-        float distance = Vector3.Distance(transform.position, target.position);
+        float distance = Vector3.Distance(transform.localPosition, target.localPosition);
 
         //Nos movemos hacia el target a la velocidad indicada. 
         if (distance > minDist)
-            transform.position += transform.forward * speed * Time.deltaTime;
+            transform.localPosition += transform.forward * speed * Time.deltaTime;
     }
 }

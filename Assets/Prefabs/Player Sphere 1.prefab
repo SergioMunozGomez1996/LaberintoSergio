@@ -113,6 +113,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  explosionObject: {fileID: 3423961329146552634, guid: 072c2c624a7e2d246a5414e61736005b,
+    type: 3}
 --- !u!54 &6652423351961017868
 Rigidbody:
   m_ObjectHideFlags: 0
