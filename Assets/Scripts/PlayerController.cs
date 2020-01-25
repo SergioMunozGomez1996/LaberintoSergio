@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour {
 
     void SetCountText()
     {
-            countText.text = "Contador: " + contador.ToString();
+            countText.text = "Contador: " + contador.ToString() + " de " + booTotal;
             if (contador >= booTotal)
             {
             Time.timeScale = 0.3F;

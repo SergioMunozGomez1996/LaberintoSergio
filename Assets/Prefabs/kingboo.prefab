@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2069527581231208872}
   - component: {fileID: 2069527581231208875}
   - component: {fileID: 2069527581231208873}
+  - component: {fileID: 3414847690144688288}
   m_Layer: 0
   m_Name: kingboo
   m_TagString: boo
@@ -99,6 +100,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9311ee3ae1ddd24489febb3997f751a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3414847690144688288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069527581231208874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994bcf98c0452e94888bb9370af19c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioData: {fileID: 5198958067109038023, guid: 31b80b2d5e6025d47970c384784811e9,
+    type: 3}
 --- !u!1 &2732212255731763976
 GameObject:
   m_ObjectHideFlags: 0
